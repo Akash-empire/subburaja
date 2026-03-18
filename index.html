@@ -3,76 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Subburaja | Frontend Engineer Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Subburaja | Frontend Engineer</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --primary: #4f46e5;
-      --bg: #ffffff;
-      --surface: #f8fafc;
-      --text-main: #0f172a;
+      --primary-color: #4f46e5;
+      --text-dark: #0f172a;
       --text-muted: #64748b;
-      --border: #e2e8f0;
-      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-      scroll-behavior: smooth;
+      --transition: all 0.4s ease;
     }
 
     body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      line-height: 1.6;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      overflow-x: hidden;
     }
 
     /* --- NAVIGATION --- */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      padding: 1rem 8%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(15px);
-      z-index: 1000;
-      border-bottom: 1px solid var(--border);
+    .navbar {
+      background: rgba(255, 255, 255, 0.9) !important;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #eee;
+      padding: 0.8rem 0;
     }
 
-    .logo img {
-      height: 40px; /* Adjust based on your logo image */
+    .navbar-brand img {
+      height: 40px;
       width: auto;
-      display: block;
     }
 
-    .nav-links { display: flex; gap: 2.5rem; }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-main);
-      font-size: 0.85rem;
+    .nav-link {
       font-weight: 600;
+      font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 1px;
+      color: var(--text-dark) !important;
+      margin: 0 10px;
       transition: var(--transition);
     }
-    .nav-links a:hover { color: var(--primary); }
+
+    .nav-link:hover {
+      color: var(--primary-color) !important;
+    }
 
     /* --- UNIFIED HERO BANNER --- */
-    #home {
+    .hero-banner {
       position: relative;
       height: 100vh;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
       color: white;
+      text-align: center;
+      background-color: #000;
     }
 
     .hero-bg {
@@ -83,19 +70,18 @@
       height: 100%;
       object-fit: cover;
       z-index: 1;
-      filter: brightness(0.5); /* Darkens image for text contrast */
+      opacity: 0.6; /* Darkens image for text */
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-      text-align: center;
+      max-width: 800px;
       padding: 0 20px;
-      max-width: 900px;
     }
 
     .hero-tag {
-      color: var(--primary);
+      color: var(--primary-color);
       font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
@@ -104,316 +90,278 @@
       display: block;
     }
 
-    #home h1 {
-      font-size: clamp(2.2rem, 6vw, 4.5rem);
+    .hero-content h1 {
+      font-size: clamp(2.2rem, 5vw, 4.5rem);
       font-weight: 700;
       line-height: 1.1;
-      margin-bottom: 1.5rem;
       letter-spacing: -2px;
     }
 
     #typing {
-      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-size: 1.2rem;
       font-weight: 300;
-      opacity: 0.9;
+      margin-top: 1rem;
+      min-height: 1.5em;
     }
 
-    /* --- ABOUT SECTION --- */
-    section { padding: 120px 10%; border-bottom: 1px solid var(--border); }
-    
+    /* --- SECTION STYLING --- */
+    section {
+      padding: 100px 0;
+    }
+
     .section-label {
-      color: var(--primary);
+      color: var(--primary-color);
       font-weight: 700;
       text-transform: uppercase;
       font-size: 0.8rem;
       letter-spacing: 2px;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
       display: block;
     }
 
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .about-text-large { font-size: 1.5rem; font-weight: 400; color: var(--text-main); }
-    .about-text-small { color: var(--text-muted); font-size: 1.1rem; }
-
-    /* --- SERVICES SECTION --- */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.5rem;
-    }
-
+    /* --- CARDS & PORTFOLIO --- */
     .service-card {
-      padding: 3rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 40px;
+      height: 100%;
       transition: var(--transition);
-      border-radius: 10px;
     }
 
     .service-card:hover {
-      background: var(--bg);
-      border-color: var(--primary);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.05);
-      transform: translateY(-8px);
-    }
-
-    .service-card h3 { margin-bottom: 1rem; font-size: 1.3rem; font-weight: 600; }
-
-    /* --- PORTFOLIO SECTION --- */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
+      transform: translateY(-10px);
+      border-color: var(--primary-color);
+      background: white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
 
     .project-card {
       position: relative;
       overflow: hidden;
-      aspect-ratio: 16/10;
-      background: #000;
       border-radius: 12px;
+      margin-bottom: 24px;
+      background: #000;
     }
 
     .project-card img {
       width: 100%;
-      height: 100%;
+      height: 300px;
       object-fit: cover;
+      opacity: 0.7;
       filter: grayscale(100%);
       transition: var(--transition);
-      opacity: 0.8;
     }
 
     .project-card:hover img {
+      opacity: 1;
       filter: grayscale(0%);
       transform: scale(1.05);
-      opacity: 1;
     }
 
-    .project-overlay {
+    .project-info {
       position: absolute;
-      bottom: 2rem;
-      left: 2rem;
+      bottom: 20px;
+      left: 20px;
       color: white;
-      z-index: 2;
       opacity: 0;
-      transform: translateY(15px);
+      transform: translateY(10px);
       transition: var(--transition);
     }
 
-    .project-card:hover .project-overlay {
+    .project-card:hover .project-info {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* --- CONTACT SECTION --- */
-    .contact-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-
-    .contact-details h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem; }
-    .contact-info { margin-top: 2rem; color: var(--text-muted); font-size: 1rem; }
-    .contact-info span { display: block; margin-bottom: 10px; }
-
-    .contact-form input, .contact-form textarea {
-      width: 100%;
-      padding: 1.2rem;
-      margin-bottom: 1.2rem;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      font-size: 1rem;
-      border-radius: 6px;
-    }
-
-    .contact-form button {
-      padding: 1.2rem 3rem;
-      background: var(--text-main);
-      color: white;
-      border: none;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-      border-radius: 6px;
-    }
-
-    .contact-form button:hover {
-      background: var(--primary);
-    }
-
     /* --- FOOTER --- */
-    footer { padding: 4rem 10%; border-top: 1px solid var(--border); font-size: 0.9rem; color: var(--text-muted); text-align: center; }
-
-    /* --- MEDIA QUERIES --- */
-
-    /* iPad / Tablet (Large) */
-    @media (max-width: 1024px) {
-      nav { padding: 1rem 5%; }
-      .about-content, .contact-wrapper { grid-template-columns: 1fr; gap: 3rem; }
-      .nav-links { gap: 1.5rem; }
+    footer {
+      padding: 30px 0;
+      border-top: 1px solid #eee;
+      background: white;
     }
 
-    /* iPad Pro / Large Tablet (Portrait) */
-    @media (max-width: 834px) {
-      .hero-content h1 { font-size: 3rem; }
-      section { padding: 80px 5%; }
+    /* Single Line Footer Styles */
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
     }
 
-    /* Mobile (Small Phone) */
-    @media (max-width: 576px) {
-      .nav-links { display: none; } /* Consider a mobile menu button here */
-      .hero-content h1 { font-size: 2.2rem; }
-      .about-text-large { font-size: 1.2rem; }
-      .portfolio-grid { grid-template-columns: 1fr; }
-      .contact-details h2 { font-size: 2rem; }
+    /* --- RESPONSIVE ADJUSTMENTS --- */
+    @media (max-width: 768px) {
+      .footer-content {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+      section { padding: 60px 0; }
     }
   </style>
 </head>
 <body>
 
-  <nav>
-    <div class="logo">
-      <img src="https://images.wallpapersden.com/image/download/roman-reigns-monochrome_a2Zla2WUmZqaraWkpJRmbmdlrWZlbWU.jpg" alt="Subburaja Logo">
-    </div>
-    <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#services">Expertise</a>
-      <a href="#portfolio">Work</a>
-      <a href="#contact">Contact</a>
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="https://images.wallpapersden.com/image/download/roman-reigns-monochrome_a2Zla2WUmZqaraWkpJRmbmdlrWZlbWU.jpg" alt="Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
 
-  <header id="home">
+  <header class="hero-banner" id="home">
     <img src="https://images.wallpapersden.com/image/download/roman-reigns-monochrome_a2Zla2WUmZqaraWkpJRmbmdlrWZlbWU.jpg" class="hero-bg" alt="Hero Background">
     <div class="hero-content">
       <span class="hero-tag">Frontend Developer</span>
-      <h1>Crafting Digital Experiences <br>with Precision.</h1>
+      <h1>Crafting Digital Experiences <br class="d-none d-md-block"> with Precision.</h1>
       <div id="typing"></div>
     </div>
   </header>
 
   <section id="about">
-    <span class="section-label">Profile</span>
-    <div class="about-content">
-      <div class="about-text-large">
-        S.V. Subburaja — I am a dedicated Frontend Engineer with 4 years of experience building modern, responsive digital products.
-      </div>
-      <div class="about-text-small">
-        Specializing in HTML5, CSS3, and JavaScript, I transform designs into high-performance websites. My expertise with the Bootstrap framework allows for rapid, mobile-first development that ensures a consistent user experience across all devices.
+    <div class="container">
+      <span class="section-label">Profile</span>
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h2 class="display-6 fw-bold">4 Years of Engineering High-Performance UIs.</h2>
+        </div>
+        <div class="col-lg-6 text-secondary">
+          <p>I am a Frontend Specialist with 4 years of expertise in building modern, responsive digital products. Based on deep technical knowledge of HTML5, CSS3, and JavaScript, I translate complex requirements into clean, manageable code using the Bootstrap framework.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="services">
-    <span class="section-label">Expertise</span>
-    <div class="services-grid">
-      <div class="service-card">
-        <h3>Web Design</h3>
-        <p>Creating user-centric design layouts that focus on modern aesthetics and usability.</p>
-      </div>
-      <div class="service-card">
-        <h3>Frontend Development</h3>
-        <p>Building clean, scalable, and manageable codebases using modern JS and Bootstrap.</p>
-      </div>
-      <div class="service-card">
-        <h3>Responsive UI</h3>
-        <p>Ensuring your website looks pixel-perfect on mobile, tablet, and desktop screens.</p>
-      </div>
-      <div class="service-card">
-        <h3>UI/UX Design</h3>
-        <p>Analyzing user flow to create smooth, high-converting digital journeys.</p>
+  <section id="services" class="bg-light">
+    <div class="container">
+      <span class="section-label">Expertise</span>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="service-card">
+            <h3>Web Design</h3>
+            <p class="small text-muted">Creative and clean layouts tailored for modern brands.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="service-card">
+            <h3>Frontend Dev</h3>
+            <p class="small text-muted">Scalable codebases built with HTML5, JS, and Bootstrap.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="service-card">
+            <h3>Responsive</h3>
+            <p class="small text-muted">Websites that work perfectly on iPads, Phones, and Laptops.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="service-card">
+            <h3>UI/UX</h3>
+            <p class="small text-muted">Focusing on user flow and performance-driven design.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="portfolio">
-    <span class="section-label">Selected Projects</span>
-    <div class="portfolio-grid">
-      <div class="project-card">
-        <img src="https://images.wallpapersden.com/image/download/roman-reigns-the-tribal-chief_bWVuaGiUmZqaraWkpJRmbmdlrWdpZWU.jpg" alt="Project 1">
-        <div class="project-overlay">
-          <h4>Enterprise Dashboard</h4>
-          <p>HTML5, CSS3, Bootstrap</p>
+    <div class="container">
+      <span class="section-label">Selected Projects</span>
+      <div class="row">
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card">
+            <img src="https://images.wallpapersden.com/image/download/roman-reigns-the-tribal-chief_bWVuaGiUmZqaraWkpJRmbmdlrWdpZWU.jpg" alt="P1">
+            <div class="project-info"><h5>Enterprise UI</h5><p>Bootstrap 5</p></div>
+          </div>
         </div>
-      </div>
-      <div class="project-card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEoLyWqmowcOCCk__iqDzpdXfcdK7mwOKWlA&s" alt="Project 2">
-        <div class="project-overlay">
-          <h4>SaaS Marketing Website</h4>
-          <p>Vanilla JavaScript, CSS3</p>
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEoLyWqmowcOCCk__iqDzpdXfcdK7mwOKWlA&s" alt="P2">
+            <div class="project-info"><h5>SaaS App</h5><p>JavaScript</p></div>
+          </div>
         </div>
-      </div>
-      <div class="project-card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMRk12v82uI9M8qoyq72S-o5zbHEv8t3i-Cg&s" alt="Project 3">
-        <div class="project-overlay">
-          <h4>E-Commerce Platform</h4>
-          <p>Bootstrap 5, JS Animations</p>
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMRk12v82uI9M8qoyq72S-o5zbHEv8t3i-Cg&s" alt="P3">
+            <div class="project-info"><h5>E-Commerce</h5><p>HTML/CSS</p></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="contact">
-    <span class="section-label">Contact</span>
-    <div class="contact-wrapper">
-      <div class="contact-details">
-        <h2>Let’s start a project together.</h2>
-        <div class="contact-info">
-          <span>📧 subburaja261@gmail.com</span>
-          <span>📞 +91 7550126266</span>
-          <span style="margin-top: 20px;">Available for full-time and freelance roles.</span>
+  <section id="contact" class="bg-light">
+    <div class="container">
+      <span class="section-label">Get in Touch</span>
+      <div class="row">
+        <div class="col-lg-5 mb-5 mb-lg-0">
+          <h2 class="fw-bold">Let's discuss your next project.</h2>
+          <p class="mt-4">📧 subburaja261@gmail.com<br>📞 7550126266</p>
+        </div>
+        <div class="col-lg-7">
+          <form action="https://formsubmit.co/subburaja261@gmail.com" method="POST" class="row g-3">
+            <div class="col-md-6">
+              <input type="text" name="name" class="form-control" placeholder="Name" required>
+            </div>
+            <div class="col-md-6">
+              <input type="email" name="email" class="form-control" placeholder="Email" required>
+            </div>
+            <div class="col-12">
+              <textarea name="message" class="form-control" rows="4" placeholder="Message" required></textarea>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-dark px-5 py-2">Send Message</button>
+            </div>
+          </form>
         </div>
       </div>
-      <form class="contact-form" action="https://formsubmit.co/subburaja261@gmail.com" method="POST">
-        <input type="text" name="name" placeholder="Full Name" required>
-        <input type="email" name="email" placeholder="Email Address" required>
-        <textarea name="message" rows="5" placeholder="Tell me about your project" required></textarea>
-        <button type="submit">Initialize Conversation</button>
-      </form>
     </div>
   </section>
 
   <footer>
-    <div style="margin-bottom: 20px;">© 2026 S.V. Subburaja. Created with passion for the web.</div>
-    <div style="font-size: 0.75rem;">HTML5 • CSS3 • JAVASCRIPT • BOOTSTRAP</div>
+    <div class="container">
+      <div class="footer-content">
+        <div>© 2026 S.V. Subburaja — All Rights Reserved</div>
+        <div>HTML5 • CSS3 • JAVASCRIPT • BOOTSTRAP</div>
+        <div>Contact: subburaja261@gmail.com</div>
+      </div>
+    </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
   <script>
-    // Typing Effect script
-    const text = "Frontend Specialist specializing in HTML, CSS, JavaScript, and Bootstrap.";
-    let i = 0;
+    // Typing Effect
+    const textArr = "Expertise in HTML5, CSS3, JavaScript, and Bootstrap 5.";
+    let charIndex = 0;
     function typeEffect() {
-      if (i < text.length) {
-        document.getElementById("typing").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeEffect, 45);
+      if (charIndex < textArr.length) {
+        document.getElementById("typing").innerHTML += textArr.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeEffect, 40);
       }
     }
     window.onload = typeEffect;
 
-    // Scroll Reveal Intersection Observer
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = "1";
-          entry.target.style.transform = "translateY(0)";
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('section').forEach(section => {
-      section.style.opacity = "0";
-      section.style.transform = "translateY(30px)";
-      section.style.transition = "all 0.8s ease-out";
-      observer.observe(section);
+    // Smooth Collapse on Mobile when link is clicked
+    const navLinks = document.querySelectorAll('.nav-link');
+    const menuToggle = document.getElementById('navbarNav');
+    const bsCollapse = new bootstrap.Collapse(menuToggle, {toggle:false});
+    navLinks.forEach((l) => {
+        l.addEventListener('click', () => { if(window.innerWidth < 992) { bsCollapse.hide(); } });
     });
   </script>
 
