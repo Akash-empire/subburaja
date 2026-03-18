@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Subburaja Portfooolio</title>
-
+  <title>Subburaja | Frontend Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --main: #00adb5;
-      --dark: #0f172a;
-      --light: #f8fafc;
+      --primary: #00d2ff;
+      --secondary: #3a7bd5;
+      --bg: #0f172a;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --text: #f8fafc;
+      --accent: #f43f5e;
     }
 
     * {
@@ -22,753 +24,652 @@
     }
 
     body {
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: #fff;
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
     }
 
-    /* NAVBAR */
+    /* --- NAVIGATION --- */
     nav {
       position: fixed;
-      width: 100%;
       top: 0;
+      width: 100%;
+      padding: 1.5rem 10%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 5%;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(15, 23, 42, 0.8);
       backdrop-filter: blur(10px);
       z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    .nav-left a {
-      color: #fff;
-      margin-right: 15px;
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
       text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: 0.3s;
+      opacity: 0.7;
     }
+    .nav-links a:hover { opacity: 1; color: var(--primary); }
 
-    .nav-right {
-      color: #fff;
-      font-size: 13px;
-      display: flex;
-      gap: 15px;
-    }
-
-    /* HERO */
+    /* --- HERO SECTION --- */
     #home {
       height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
       text-align: center;
+      padding: 0 10%;
+      background: radial-gradient(circle at top right, #1e293b, #0f172a);
     }
 
-    #home img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      border: 4px solid var(--main);
-      box-shadow: 0 0 25px var(--main);
-      margin-bottom: 15px;
+    .hero-content h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
     }
 
-    #home h1 {
-      font-size: 42px;
+    .hero-content span {
+      color: var(--primary);
+      text-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
     }
 
     #typing {
-      color: var(--main);
-      font-weight: bold;
+      font-size: 1.2rem;
+      color: #94a3b8;
+      min-height: 1.5em;
     }
 
-    /* SECTION */
+    .hero-img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--primary);
+      margin-bottom: 2rem;
+      box-shadow: 0 0 30px rgba(0, 210, 255, 0.2);
+    }
+
+    /* --- SECTIONS GENERAL --- */
     section {
-      padding: 80px 8%;
+      padding: 100px 10%;
+      min-height: 100vh;
     }
 
     h2 {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
       text-align: center;
-      margin-bottom: 30px;
-      font-size: 30px;
-    }
-
-    #banner {
-      height: 100vh;
       position: relative;
-      overflow: hidden;
     }
 
-    .slider {
-      position: relative;
-      height: 100%;
+    h2::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 4px;
+      background: var(--primary);
+      margin: 10px auto;
+      border-radius: 2px;
     }
 
-    .slide {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-
-    .slide.active {
-      opacity: 1;
-      z-index: 1;
-    }
-
-    .slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* TEXT CONTENT */
-    .content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      color: #fff;
-    }
-
-    /* TEXT ANIMATION */
-    .content h1,
-    .content p {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .slide.active .content h1 {
-      animation: fadeUp 1s forwards;
-    }
-
-    .slide.active .content p {
-      animation: fadeUp 1s 0.5s forwards;
-    }
-
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* BUTTONS */
-    .prev,
-    .next {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-    }
-
-    .prev {
-      left: 10px;
-    }
-
-    .next {
-      right: 10px;
-    }
-
-    /* ABOUT */
-    #about p {
-      max-width: 700px;
-      margin: auto;
-      text-align: center;
-      line-height: 1.7;
-    }
-
-    /* SERVICES */
-    .services {
+    /* --- CARDS & GRID --- */
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 20px;
-      border-radius: 15px;
-      text-align: center;
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
       transition: 0.4s;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      cursor: default;
     }
 
     .card:hover {
-      transform: translateY(-10px) scale(1.05);
-      box-shadow: 0 0 20px var(--main);
+      transform: translateY(-10px);
+      background: rgba(255,255,255,0.1);
+      border-color: var(--primary);
     }
 
-    /* PORTFOLIO */
-    .portfolio {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .project {
+    /* --- PORTFOLIO IMAGES --- */
+    .portfolio-item {
       position: relative;
-      border-radius: 10px;
+      border-radius: 20px;
       overflow: hidden;
+      height: 300px;
     }
 
-    .project img {
+    .portfolio-item img {
       width: 100%;
-      height: 180px;
+      height: 100%;
       object-fit: cover;
-      transition: 0.4s;
+      transition: 0.5s;
     }
 
-    .project:hover img {
+    .portfolio-item:hover img {
       transform: scale(1.1);
+      filter: brightness(0.4);
     }
 
     .overlay {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background: rgba(0, 0, 0, 0.8);
+      inset: 0;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       opacity: 0;
-      transition: 0.4s;
+      transition: 0.5s;
+      font-weight: 600;
+      font-size: 1.5rem;
     }
 
-    .project:hover .overlay {
-      opacity: 1;
+    .portfolio-item:hover .overlay { opacity: 1; }
+
+    /* --- CONTACT FORM --- */
+    .contact-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 3rem;
+      border-radius: 30px;
     }
 
-    .overlay button {
-      margin-top: 10px;
-      padding: 8px 15px;
-      border: none;
-      background: var(--main);
-      color: #fff;
-      cursor: pointer;
-    }
-
-    /* CONTACT */
-    #contact {
-      background: #020617;
-    }
-
-    .contact-box {
-      max-width: 500px;
-      margin: auto;
-    }
-
-    input,
-    textarea {
+    input, textarea {
       width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border: none;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: white;
+      border-radius: 10px;
     }
 
     button {
-      background: var(--main);
-      color: #fff;
-      padding: 12px;
-      border: none;
-      cursor: pointer;
-      border-radius: 8px;
       width: 100%;
+      padding: 1rem;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      border: none;
+      color: white;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
       transition: 0.3s;
     }
 
-    button:hover {
-      box-shadow: 0 0 15px var(--main);
-    }
+    button:hover { opacity: 0.9; transform: scale(1.02); }
 
-    /* ANIMATION */
-    .fade {
+    /* --- ANIMATIONS --- */
+    .reveal {
       opacity: 0;
-      transform: translateY(40px);
-      transition: 1s;
+      transform: translateY(30px);
+      transition: 0.8s ease-out;
     }
 
-    .show {
+    .reveal.active {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* =========================
-   MOBILE (up to 600px)
-========================= */
-    @media (max-width:600px) {
-
-      /* NAVBAR */
-      nav {
-        flex-direction: column;
-        padding: 10px;
-      }
-
-      .nav-left {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-      }
-
-      .nav-right {
-        font-size: 12px;
-        margin-top: 5px;
-        flex-direction: column;
-        align-items: center;
-        gap: 5px;
-      }
-
-      /* HERO */
-      #home h1 {
-        font-size: 26px;
-      }
-
-      #home p {
-        font-size: 14px;
-      }
-
-      #home img {
-        width: 100px;
-        height: 100px;
-      }
-
-      /* BANNER TEXT */
-      .content h1 {
-        font-size: 22px;
-      }
-
-      .content p {
-        font-size: 14px;
-      }
-
-      /* SERVICES */
-      .services {
-        grid-template-columns: 1fr;
-      }
-
-      /* PORTFOLIO */
-      .portfolio {
-        grid-template-columns: 1fr;
-      }
-
-      .project img {
-        height: 160px;
-      }
-
-      /* CONTACT */
-      .contact-box {
-        width: 100%;
-        padding: 0 10px;
-      }
-
-      input,
-      textarea {
-        font-size: 14px;
-      }
-
-      button {
-        font-size: 14px;
-      }
-    }
-
-
-    /* =========================
-   TABLET (601px - 992px)
-========================= */
-    @media (min-width:601px) and (max-width:992px) {
-
-      /* NAVBAR */
-      nav {
-        padding: 10px 3%;
-      }
-
-      .nav-right {
-        font-size: 12px;
-      }
-
-      /* HERO */
-      #home h1 {
-        font-size: 32px;
-      }
-
-      #home img {
-        width: 120px;
-        height: 120px;
-      }
-
-      /* BANNER TEXT */
-      .content h1 {
-        font-size: 28px;
-      }
-
-      .content p {
-        font-size: 16px;
-      }
-
-      /* SERVICES */
-      .services {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      /* PORTFOLIO */
-      .portfolio {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-
-    /* =========================
-   LARGE SCREENS (1200px+)
-========================= */
-    @media (min-width:1200px) {
-
-      section {
-        padding: 100px 10%;
-      }
-
-      #home h1 {
-        font-size: 48px;
-      }
-
-      .content h1 {
-        font-size: 42px;
-      }
-
-    }
-
-    /* DEFAULT (DESKTOP) */
-    .menu-toggle {
-      display: none;
-    }
-
-    #popupMenu {
-      display: none;
-    }
-
-    /* MOBILE + TABLET ONLY */
-    @media(max-width:768px) {
-
-      /* Hide normal menu */
-      .nav-left,
-      .nav-right {
-        display: none;
-      }
-
-      /* Show hamburger */
-      .menu-toggle {
-        display: block;
-        font-size: 22px;
-        color: #fff;
-        cursor: pointer;
-      }
-
-      /* Popup menu */
-      #popupMenu {
-        display: flex;
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: #020617;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transition: 0.4s;
-        z-index: 2000;
-      }
-
-      #popupMenu.active {
-        left: 0;
-      }
-
-      #popupMenu a {
-        color: #fff;
-        font-size: 22px;
-        margin: 15px 0;
-        text-decoration: none;
-      }
-
-      #popupMenu a:hover {
-        color: #00adb5;
-      }
-
-      .close-btn {
-        position: absolute;
-        top: 20px;
-        right: 30px;
-        font-size: 25px;
-        cursor: pointer;
-        color: #fff;
-      }
-
-      nav {
-        justify-content: space-between;
-        padding: 10px 20px;
-      }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-content h1 { font-size: 2.5rem; }
     }
   </style>
-
 </head>
-
 <body>
 
-  <!-- NAV -->
   <nav>
-
-    <div class="nav-left">
+    <div class="logo">SUBBURAJA.DEV</div>
+    <div class="nav-links">
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#services">Services</a>
       <a href="#portfolio">Portfolio</a>
       <a href="#contact">Contact</a>
     </div>
-
-    <div class="nav-right">
-      <span>📞 7550126266</span>
-      <span>📧 subburaja261@gmail.com</span>
-    </div>
-
-    <!-- Hamburger -->
-    <div class="menu-toggle" onclick="openMenu()">☰</div>
-
   </nav>
 
-  <!-- POPUP MENU -->
-  <div id="popupMenu">
-    <span class="close-btn" onclick="closeMenu()">✖</span>
-
-    <span>📞 7550126266</span>
-    <span>📧 subburaja261@gmail.com</span>
-    
-    <a href="#home" onclick="closeMenu()">Home</a>
-    <a href="#about" onclick="closeMenu()">About</a>
-    <a href="#services" onclick="closeMenu()">Services</a>
-    <a href="#portfolio" onclick="closeMenu()">Portfolio</a>
-    <a href="#contact" onclick="closeMenu()">Contact</a>
-  </div>
-
-  <!-- HERO -->
-
   <section id="home">
-    <img
-      src="https://wp.clutchpoints.com/wp-content/uploads/2025/02/WWE-news-Roman-Reigns-NSFW-reason-for-not-retiring-yet.jpg?resize=1200,1200">
-    <h1>S. V. <span>Subburaja</span></h1>
-    <p id="typing"></p>
-  </section>
-
-
-  <section id="banner">
-
-    <div class="slider">
-
-      <!-- Slide 1 -->
-      <div class="slide active">
-        <img
-          src="https://images.wallpapersden.com/image/download/roman-reigns-monochrome_a2Zla2WUmZqaraWkpJRmbmdlrWZlbWU.jpg">
-        <div class="content">
-          <h1>Welcome to My Portfolio</h1>
-          <p>Creative Frontend Developer</p>
-        </div>
-      </div>
-
-      <!-- Slide 2 -->
-      <div class="slide">
-        <img
-          src="https://images.wallpapersden.com/image/download/roman-reigns-wwe-champion_amxqammUmZqaraWkpJRmbmdlrWZlbWU.jpg">
-        <div class="content">
-          <h1>Modern Web Design</h1>
-          <p>Responsive & Clean UI</p>
-        </div>
-      </div>
-
-      <!-- Slide 3 -->
-      <div class="slide">
-        <img src="https://wallpapers.com/images/hd/powerful-roman-reigns-j0t7gtupvpakw2mq.jpg">
-        <div class="content">
-          <h1>4 Years Experience</h1>
-          <p>HTML, CSS, JavaScript, Bootstrap</p>
-        </div>
-      </div>
-
-      <!-- Buttons -->
-      <!-- <button class="prev" onclick="changeSlide(-1)">❮</button>
-      <button class="next" onclick="changeSlide(1)">❯</button> -->
-
+    <div class="hero-content">
+      <img src="https://wp.clutchpoints.com/wp-content/uploads/2025/02/WWE-news-Roman-Reigns-NSFW-reason-for-not-retiring-yet.jpg?resize=1200,1200" class="hero-img" alt="Profile">
+      <h1>Hi, I'm <span>Subburaja</span></h1>
+      <p id="typing"></p>
     </div>
-
   </section>
 
-
-  <!-- ABOUT -->
-  <section id="about" class="fade">
+  <section id="about" class="reveal">
     <h2>About Me</h2>
-    <p>
-      I am a Frontend Developer with 4 years of experience in HTML5, CSS3,
-      JavaScript and Bootstrap. I create modern, responsive and high-performance websites.
-    </p>
+    <div class="card">
+        <p style="font-size: 1.2rem; line-height: 1.8; text-align: center;">
+            With 4 years of expertise in crafting digital experiences, I specialize in turning complex problems into elegant, responsive frontend solutions. My toolkit includes HTML5, CSS3, JavaScript, and Bootstrap, ensuring every pixel is perfectly placed.
+        </p>
+    </div>
   </section>
 
-  <!-- SERVICES -->
-  <section id="services" class="fade">
+  <section id="services" class="reveal">
     <h2>Services</h2>
-    <div class="services">
-      <div class="card">Web Design</div>
-      <div class="card">Frontend Development</div>
-      <div class="card">Responsive Design</div>
-      <div class="card">UI/UX Design</div>
-    </div>
-  </section>
-
-  <!-- PORTFOLIO -->
-  <section id="portfolio" class="fade">
-    <h2>Portfolio</h2>
-    <div class="portfolio">
-      <div class="project card">
-        <img
-          src="https://images.wallpapersden.com/image/download/roman-reigns-the-tribal-chief_bWVuaGiUmZqaraWkpJRmbmdlrWdpZWU.jpg">
-        <div class="overlay">Project 1</div>
+    <div class="grid">
+      <div class="card">
+        <h3>Web Design</h3>
+        <p>Creating visually stunning and user-friendly layouts.</p>
       </div>
-      <div class="project card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEoLyWqmowcOCCk__iqDzpdXfcdK7mwOKWlA&s">
-        <div class="overlay">Project 2</div>
+      <div class="card">
+        <h3>Frontend Dev</h3>
+        <p>Clean, scalable code using modern JS frameworks.</p>
       </div>
-      <div class="project card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMRk12v82uI9M8qoyq72S-o5zbHEv8t3i-Cg&s">
-        <div class="overlay">Project 3</div>
+      <div class="card">
+        <h3>Responsive UI</h3>
+        <p>Your site will look perfect on phones, tablets, and desktops.</p>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <h2>Contact Me</h2>
+  <section id="portfolio" class="reveal">
+    <h2>Featured Work</h2>
+    <div class="grid">
+      <div class="portfolio-item">
+        <img src="https://images.wallpapersden.com/image/download/roman-reigns-the-tribal-chief_bWVuaGiUmZqaraWkpJRmbmdlrWdpZWU.jpg" alt="P1">
+        <div class="overlay">E-Commerce UI</div>
+      </div>
+      <div class="portfolio-item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEoLyWqmowcOCCk__iqDzpdXfcdK7mwOKWlA&s" alt="P2">
+        <div class="overlay">SaaS Dashboard</div>
+      </div>
+      <div class="portfolio-item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMRk12v82uI9M8qoyq72S-o5zbHEv8t3i-Cg&s" alt="P3">
+        <div class="overlay">Creative Agency</div>
+      </div>
+    </div>
+  </section>
 
-    <div class="contact-box">
-
+  <section id="contact" class="reveal">
+    <h2>Get In Touch</h2>
+    <div class="contact-container">
       <form action="https://formsubmit.co/subburaja261@gmail.com" method="POST">
-
-        <input type="text" name="name" placeholder="Your Name" required>
-
-        <input type="email" name="email" placeholder="Your Email" required>
-
-        <textarea name="message" rows="4" placeholder="Message" required></textarea>
-
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
         <button type="submit">Send Message</button>
-
-        <!-- Hidden Settings -->
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_subject" value="New Portfolio Message from Website">
-        <input type="hidden" name="_template" value="table">
-
       </form>
     </div>
   </section>
 
   <script>
-    // ACTIVE NAV LINK
-    const sections = document.querySelectorAll("section");
-    const navLinks = document.querySelectorAll("nav a");
-
-    window.addEventListener("scroll", () => {
-      let current = "";
-      sections.forEach(sec => {
-        const top = window.scrollY;
-        const offset = sec.offsetTop - 100;
-        const height = sec.offsetHeight;
-        if (top >= offset && top < offset + height) {
-          current = sec.getAttribute("id");
-        }
-      });
-
-      navLinks.forEach(a => {
-        a.classList.remove("active");
-        if (a.getAttribute("href") == "#" + current) {
-          a.classList.add("active");
-        }
-      });
-    });
-
-    // SCROLL ANIMATION
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        }
-      });
-    });
-
-    document.querySelectorAll(".fade").forEach(el => {
-      observer.observe(el);
-    });
-
-    function send() {
-      alert("Message sent successfully!");
-    }
-  </script>
-  <script>
-    const text = "Frontend Developer | HTML, CSS, JavaScript, Bootstrap";
+    // Typing Effect
+    const text = "Creative Frontend Developer | 4 Years Experience";
     let i = 0;
-
-    function typing() {
+    function type() {
       if (i < text.length) {
         document.getElementById("typing").innerHTML += text.charAt(i);
         i++;
-        setTimeout(typing, 50);
+        setTimeout(type, 50);
       }
     }
-    typing();
+    window.onload = type;
+
+    // Scroll Reveal Effect
+    function reveal() {
+      var reveals = document.querySelectorAll(".reveal");
+      for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 150;
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add("active");
+        }
+      }
+    }
+    window.addEventListener("scroll", reveal);
   </script>
-
-  <script>
-    let slides = document.querySelectorAll(".slide");
-    let current = 0;
-
-    function showSlide(index) {
-      slides.forEach((slide) => {
-        slide.classList.remove("active");
-      });
-
-      slides[index].classList.add("active");
-    }
-
-    function changeSlide(step) {
-      current += step;
-
-      if (current < 0) current = slides.length - 1;
-      if (current >= slides.length) current = 0;
-
-      showSlide(current);
-    }
-
-    // AUTO SLIDE
-    setInterval(() => {
-      changeSlide(1);
-    }, 4000);
-  </script>
-
-  <script>
-    function openMenu() {
-      document.getElementById("popupMenu").classList.add("active");
-    }
-
-    function closeMenu() {
-      document.getElementById("popupMenu").classList.remove("active");
-    }
-  </script>
-
 </body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subburaja | Frontend Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #00d2ff;
+      --secondary: #3a7bd5;
+      --bg: #0f172a;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --text: #f8fafc;
+      --accent: #f43f5e;
+    }
 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* --- NAVIGATION --- */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.5rem 10%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: 0.3s;
+      opacity: 0.7;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--primary); }
+
+    /* --- HERO SECTION --- */
+    #home {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 10%;
+      background: radial-gradient(circle at top right, #1e293b, #0f172a);
+    }
+
+    .hero-content h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-content span {
+      color: var(--primary);
+      text-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+    }
+
+    #typing {
+      font-size: 1.2rem;
+      color: #94a3b8;
+      min-height: 1.5em;
+    }
+
+    .hero-img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--primary);
+      margin-bottom: 2rem;
+      box-shadow: 0 0 30px rgba(0, 210, 255, 0.2);
+    }
+
+    /* --- SECTIONS GENERAL --- */
+    section {
+      padding: 100px 10%;
+      min-height: 100vh;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 4px;
+      background: var(--primary);
+      margin: 10px auto;
+      border-radius: 2px;
+    }
+
+    /* --- CARDS & GRID --- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: 0.4s;
+      cursor: default;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      background: rgba(255,255,255,0.1);
+      border-color: var(--primary);
+    }
+
+    /* --- PORTFOLIO IMAGES --- */
+    .portfolio-item {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 300px;
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.5s;
+    }
+
+    .portfolio-item:hover img {
+      transform: scale(1.1);
+      filter: brightness(0.4);
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: 0.5s;
+      font-weight: 600;
+      font-size: 1.5rem;
+    }
+
+    .portfolio-item:hover .overlay { opacity: 1; }
+
+    /* --- CONTACT FORM --- */
+    .contact-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 3rem;
+      border-radius: 30px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: white;
+      border-radius: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      border: none;
+      color: white;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover { opacity: 0.9; transform: scale(1.02); }
+
+    /* --- ANIMATIONS --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: 0.8s ease-out;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-content h1 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">SUBBURAJA.DEV</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <section id="home">
+    <div class="hero-content">
+      <img src="https://wp.clutchpoints.com/wp-content/uploads/2025/02/WWE-news-Roman-Reigns-NSFW-reason-for-not-retiring-yet.jpg?resize=1200,1200" class="hero-img" alt="Profile">
+      <h1>Hi, I'm <span>Subburaja</span></h1>
+      <p id="typing"></p>
+    </div>
+  </section>
+
+  <section id="about" class="reveal">
+    <h2>About Me</h2>
+    <div class="card">
+        <p style="font-size: 1.2rem; line-height: 1.8; text-align: center;">
+            With 4 years of expertise in crafting digital experiences, I specialize in turning complex problems into elegant, responsive frontend solutions. My toolkit includes HTML5, CSS3, JavaScript, and Bootstrap, ensuring every pixel is perfectly placed.
+        </p>
+    </div>
+  </section>
+
+  <section id="services" class="reveal">
+    <h2>Services</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Web Design</h3>
+        <p>Creating visually stunning and user-friendly layouts.</p>
+      </div>
+      <div class="card">
+        <h3>Frontend Dev</h3>
+        <p>Clean, scalable code using modern JS frameworks.</p>
+      </div>
+      <div class="card">
+        <h3>Responsive UI</h3>
+        <p>Your site will look perfect on phones, tablets, and desktops.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio" class="reveal">
+    <h2>Featured Work</h2>
+    <div class="grid">
+      <div class="portfolio-item">
+        <img src="https://images.wallpapersden.com/image/download/roman-reigns-the-tribal-chief_bWVuaGiUmZqaraWkpJRmbmdlrWdpZWU.jpg" alt="P1">
+        <div class="overlay">E-Commerce UI</div>
+      </div>
+      <div class="portfolio-item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEoLyWqmowcOCCk__iqDzpdXfcdK7mwOKWlA&s" alt="P2">
+        <div class="overlay">SaaS Dashboard</div>
+      </div>
+      <div class="portfolio-item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMRk12v82uI9M8qoyq72S-o5zbHEv8t3i-Cg&s" alt="P3">
+        <div class="overlay">Creative Agency</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="reveal">
+    <h2>Get In Touch</h2>
+    <div class="contact-container">
+      <form action="https://formsubmit.co/subburaja261@gmail.com" method="POST">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    // Typing Effect
+    const text = "Creative Frontend Developer | 4 Years Experience";
+    let i = 0;
+    function type() {
+      if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(type, 50);
+      }
+    }
+    window.onload = type;
+
+    // Scroll Reveal Effect
+    function reveal() {
+      var reveals = document.querySelectorAll(".reveal");
+      for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 150;
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add("active");
+        }
+      }
+    }
+    window.addEventListener("scroll", reveal);
+  </script>
+</body>
 </html>
