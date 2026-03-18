@@ -27,10 +27,10 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About Me</a></li>
           <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
           <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact Me</a></li>
         </ul>
       </div>
     </div>
@@ -178,7 +178,28 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="./script.js"></script>
+
+  <script>
+    // Typing Effect
+    const textArr = "Expertise in HTML5, CSS3, JavaScript, and Bootstrap 5.";
+    let charIndex = 0;
+    function typeEffect() {
+      if (charIndex < textArr.length) {
+        document.getElementById("typing").innerHTML += textArr.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeEffect, 40);
+      }
+    }
+    window.onload = typeEffect;
+
+    // Smooth Collapse on Mobile when link is clicked
+    const navLinks = document.querySelectorAll('.nav-link');
+    const menuToggle = document.getElementById('navbarNav');
+    const bsCollapse = new bootstrap.Collapse(menuToggle, { toggle: false });
+    navLinks.forEach((l) => {
+      l.addEventListener('click', () => { if (window.innerWidth < 992) { bsCollapse.hide(); } });
+    });
+  </script>
 
 </body>
 
